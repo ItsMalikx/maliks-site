@@ -1,2 +1,2 @@
-# whosmalikx-personal-website
+# maliks-site
 wip
