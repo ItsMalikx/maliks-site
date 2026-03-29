@@ -110,10 +110,11 @@ a {
 }
 
 .brand__mark {
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  background: var(--text);
+  width: 18px;
+  height: 18px;
+  background-color: var(--text);
+  -webkit-mask: url("../assets/icons/brand-mark.svg") no-repeat center / contain;
+  mask: url("../assets/icons/brand-mark.svg") no-repeat center / contain;
 }
 
 .brand__text {
@@ -251,6 +252,17 @@ a {
   border: 0;
   border-top: 1px solid var(--line);
   margin: 1.5rem 0;
+}
+
+/* Error Page Specifics */
+.error-layout {
+  padding: 40px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 /* Footer */
