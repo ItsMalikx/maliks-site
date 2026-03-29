@@ -42,7 +42,6 @@ const GITHUB_CONFIG = {
     link.href = historyUrl;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    link.textContent = formattedDate.replace(",", " at"); // Replace the comma after the year
     link.style.textDecoration = 'underline';
     link.style.textUnderlineOffset = '3px';
 
