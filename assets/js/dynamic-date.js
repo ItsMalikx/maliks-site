@@ -2,7 +2,7 @@
 // IMPORTANT: Replace these values with your actual GitHub repository details.
 const GITHUB_CONFIG = {
   owner: "itsmalikx", // Your GitHub username
-  repo: "whosmalikx-personal-website", // The name of your repository (e.g., whosmalikx.com)
+  repo: "maliks-website", // The name of your repository (e.g., whosmalikx.com)
   filePath: "privacy.html", // The path to the file you want to track
   branch: "main" // The branch the file is on
 };
