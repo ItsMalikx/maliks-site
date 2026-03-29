@@ -112,9 +112,10 @@ a {
 .brand__mark {
   width: 18px;
   height: 18px;
-  background-color: var(--text);
-  -webkit-mask: url("../assets/icons/brand-mark.svg") no-repeat center / contain;
-  mask: url("../assets/icons/brand-mark.svg") no-repeat center / contain;
+  background-color: var(--text); /* This automatically inherits Light/Dark text colors */
+  -webkit-mask: url("../icons/brand-mark.svg") no-repeat center / contain;
+  mask: url("../icons/brand-mark.svg") no-repeat center / contain;
+  transition: background-color var(--transition); /* Smoothly transitions on toggle */
 }
 
 .brand__text {
