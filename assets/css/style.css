@@ -60,7 +60,6 @@ a {
   min-height: 100vh;
 }
 
-/* Dynamic Layout Containers */
 .container-wide {
   width: min(1200px, 90vw);
   margin: 0 auto;
@@ -76,7 +75,6 @@ a {
   margin: 0 auto;
 }
 
-/* Top Navigation */
 .topbar {
   position: sticky;
   top: 0;
@@ -95,7 +93,6 @@ a {
   gap: 16px;
 }
 
-/* Brand Logo Styling */
 .brand {
   display: inline-flex;
   align-items: center;
@@ -112,17 +109,16 @@ a {
 .brand__mark {
   width: 18px;
   height: 18px;
-  background-color: var(--text); /* This automatically inherits Light/Dark text colors */
+  background-color: var(--text);
   -webkit-mask: url("../icons/brand-mark.svg") no-repeat center / contain;
   mask: url("../icons/brand-mark.svg") no-repeat center / contain;
-  transition: background-color var(--transition); /* Smoothly transitions on toggle */
+  transition: background-color var(--transition);
 }
 
 .brand__text {
   font-size: 0.98rem;
 }
 
-/* Icon Buttons */
 .icon-btn {
   appearance: none;
   border: 1px solid var(--line-strong);
@@ -143,13 +139,12 @@ a {
   border-color: var(--text-muted);
 }
 
-/* Landing Page Specifics */
 .landing-layout {
   padding: 40px 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* This perfectly balances the empty space above and below */
+  justify-content: center;
 }
 
 .intro-block {
@@ -178,7 +173,6 @@ a {
   font-weight: 700;
 }
 
-/* Text Hyperlinks (Replaces Buttons) */
 .text-link {
   color: var(--text);
   font-weight: 500;
@@ -197,7 +191,6 @@ a {
   text-decoration-color: var(--text);
 }
 
-/* Policy Page Specifics */
 .policy-layout {
   padding: 40px 0 80px;
   flex: 1;
@@ -255,7 +248,6 @@ a {
   margin: 1.5rem 0;
 }
 
-/* Error Page Specifics */
 .error-layout {
   padding: 40px 0;
   flex: 1;
@@ -266,7 +258,6 @@ a {
   text-align: center;
 }
 
-/* Footer */
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 30px 0;
@@ -289,7 +280,6 @@ a {
   text-underline-offset: 4px;
 }
 
-/* Utilities */
 .reveal {
   opacity: 0;
   transform: translateY(15px);

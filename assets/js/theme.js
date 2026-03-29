@@ -1,4 +1,3 @@
-// Standalone theme script, adapted from your utility files for the main domain
 (function() {
   function saveTheme(theme) {
     localStorage.setItem("main-site-theme", theme);
@@ -13,7 +12,6 @@
   }
 
   function initThemeToggle() {
-    // Default to dark mode if no saved preference is found
     const saved = getSavedTheme();
     const initial = saved || "dark";
     applyTheme(initial);
@@ -21,7 +19,6 @@
     const button = document.getElementById("themeToggle");
     if (!button) return;
 
-    // Set initial icon based on theme
     button.textContent = initial === "dark" ? "☾" : "☀︎";
 
     button.addEventListener("click", () => {
@@ -34,6 +31,5 @@
     });
   }
 
-  // Initialize on load
   document.addEventListener("DOMContentLoaded", initThemeToggle);
 })();
