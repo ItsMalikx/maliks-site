@@ -60,14 +60,19 @@ a {
   min-height: 100vh;
 }
 
-/* Layout Containers */
+/* Dynamic Layout Containers */
 .container-wide {
-  width: min(1200px, calc(100% - 32px));
+  width: min(1200px, 90vw);
+  margin: 0 auto;
+}
+
+.container-medium {
+  width: min(960px, 90vw);
   margin: 0 auto;
 }
 
 .container-narrow {
-  width: min(720px, calc(100% - 32px));
+  width: min(720px, 90vw);
   margin: 0 auto;
 }
 
@@ -138,8 +143,11 @@ a {
 
 /* Landing Page Specifics */
 .landing-layout {
-  padding: 60px 0 80px;
+  padding: 40px 0;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* This perfectly balances the empty space above and below */
 }
 
 .intro-block {
@@ -198,7 +206,7 @@ a {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: clamp(20px, 5vw, 40px);
+  padding: clamp(24px, 6vw, 50px);
 }
 
 .back-link {
@@ -214,14 +222,14 @@ a {
 }
 
 .article-content {
-  font-size: 1.0625rem;
+  font-size: clamp(1rem, 2.5vw, 1.0625rem);
   line-height: 1.7;
   color: var(--text-soft);
 }
 
 .hero-title {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-size: clamp(2rem, 5vw, 3rem);
   letter-spacing: -0.04em;
   line-height: 1.1;
   color: var(--text);
@@ -231,7 +239,7 @@ a {
   color: var(--text);
   margin-top: 2.3em;
   margin-bottom: 0.7em;
-  font-size: 1.4rem;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
   letter-spacing: -0.02em;
 }
 

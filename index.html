@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Malik | Home</title>
+  <title>Home | Malik's Website</title>
   <meta name="description" content="Building simple, useful things on the web." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,10 +15,9 @@
   <div class="site-shell flex-col">
     <header class="topbar">
       <div class="topbar__inner container-wide">
-        <!-- Reverted to Limbus Archive style logo (Dot + Text) -->
         <a class="brand" href="index.html" aria-label="Home">
           <span class="brand__mark"></span>
-          <span class="brand__text">Malik</span>
+          <span class="brand__text">Malik's Website</span>
         </a>
 
         <nav class="topbar__actions" aria-label="Site actions">
@@ -27,37 +26,36 @@
       </div>
     </header>
 
-    <main class="container-narrow landing-layout reveal">
-      <section class="intro-block" style="margin-bottom: 3rem;">
-        <h1 style="color: var(--text); font-size: clamp(2rem, 4vw, 2.5rem); margin: 0 0 1.2rem 0; letter-spacing: -0.04em; line-height: 1.1;">
-          Malik
-        </h1>
-        <p>Building simple, useful things on the web.</p>
-      </section>
+    <!-- Changed to container-medium for fluid scaling -->
+    <main class="container-medium landing-layout reveal">
+      <div>
+        <section class="intro-block" style="margin-bottom: 3rem;">
+          <h1 style="color: var(--text); font-size: clamp(2rem, 5vw, 3.5rem); margin: 0 0 1.2rem 0; letter-spacing: -0.04em; line-height: 1.1;">
+            Malik
+          </h1>
+          <p>Building simple, useful things on the web.</p>
+        </section>
 
-      <!-- Simple text links layout -->
-      <div class="links-container" style="grid-template-columns: 1fr; max-width: 500px;">
-        <nav class="links-group" aria-label="Projects">
-          <h2 class="links-group__title">View Projects</h2>
-          
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <a class="text-link" href="https://lcna.whosmalikx.com">Visit Limbus Company News Archive ↗</a>
-            <!-- Add more project links here in the future -->
-          </div>
-        </nav>
+        <!-- Removed rigid width constraints so it scales dynamically -->
+        <div class="links-container" style="grid-template-columns: 1fr;">
+          <nav class="links-group" aria-label="Projects">
+            <h2 class="links-group__title">View Projects</h2>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <a class="text-link" href="https://lcna.whosmalikx.com" target="_blank" rel="noopener noreferrer">Visit Limbus Company News Archive ↗</a>
+            </div>
+          </nav>
+        </div>
       </div>
     </main>
 
     <footer class="site-footer">
       <div class="container-wide flex-col" style="align-items: center; gap: 14px;">
-        <!-- Footer Links -->
         <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-          <a href="https://github.com/whosmalikx" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-          <a href="https://linkedin.com/in/YOUR_LINKEDIN_HERE" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+          <a href="https://linkedin.com/in/malikwork" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+          <a href="https://github.com/itsmalikx" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
           <a href="privacy.html" class="footer-link">Privacy Policy</a>
         </div>
-        <!-- Copyright Bottom -->
-        <span class="text-muted" style="font-size: 0.85rem;">© 2024 Malik. All rights reserved.</span>
+        <span class="text-muted" style="font-size: 0.85rem;">© 2026 Malik. All rights reserved.</span>
       </div>
     </footer>
   </div>
