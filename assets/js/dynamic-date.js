@@ -1,6 +1,6 @@
 const GITHUB_CONFIG = {
   owner: "itsmalikx", // GitHub username
-  repo: "maliks-website", // Repo name (e.g., maliks-website)
+  repo: "maliks-site", // Repo name (e.g., maliks-website)
   filePath: "privacy.html", // File path to track
   branch: "main" // File branch
 };
