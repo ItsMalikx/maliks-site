@@ -16,7 +16,7 @@ This is a simple, fast-loading static site built with the basics:
 *   CSS
 *   JavaScript
 
-I wrote the JavaScript to be minimal and focused on small enhancements, like the theme switcher and the dynamically updated copyright year in the footer.
+I wrote the JavaScript to be minimal and focused on small enhancements, like the theme switcher and the dynamically updating revision date in the privacy policy.
 
 ## File Structure
 
