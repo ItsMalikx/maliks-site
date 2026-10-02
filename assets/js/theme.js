@@ -19,15 +19,21 @@
     const button = document.getElementById("themeToggle");
     if (!button) return;
 
-    button.textContent = initial === "dark" ? "☾" : "☀︎";
+    // The icon comes from CSS (html[data-theme]); keep the accessible label in sync.
+    const label = theme => button.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    label(initial);
 
     button.addEventListener("click", () => {
       const current = document.documentElement.getAttribute("data-theme") || "dark";
       const next = current === "light" ? "dark" : "light";
 
+      // Switch every color at once (hover fades would otherwise lag behind the page).
+      const root = document.documentElement;
+      root.classList.add("theme-switching");
       applyTheme(next);
       saveTheme(next);
-      button.textContent = next === "dark" ? "☾" : "☀︎";
+      label(next);
+      requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove("theme-switching")));
     });
   }
 
