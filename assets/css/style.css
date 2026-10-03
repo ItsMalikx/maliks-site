@@ -841,6 +841,11 @@ html[data-theme="dark"] {
 .article-content .revision-date {
   margin: 18px 0 0;
 }
+.article-content .revision-date a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
 /* ===== Round 10 ===== */
 /* One typeface throughout: the monospace accent is retired; figures stay aligned. */

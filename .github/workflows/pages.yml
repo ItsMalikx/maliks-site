@@ -1,0 +1,40 @@
+# Rebuilds the text pages (privacy.html, ...) whenever their Markdown in content/ changes, then commits
+# the result; Cloudflare Pages publishes that commit. Edit content/privacy.md (even on github.com).
+name: Build pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["content/**", "templates/**", "scripts/build_pages.py"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history: the revision date is the Markdown file's latest commit date
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build pages from Markdown
+        run: python scripts/build_pages.py
+
+      - name: Commit the built pages
+        run: |
+          git add -A -- '*.html' sitemap.xml
+          if git diff --cached --quiet; then echo "Pages already up to date"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Build pages from content/"
+          git push
