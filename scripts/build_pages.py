@@ -7,6 +7,9 @@ the date of the Markdown file's latest commit (today while it has uncommitted ed
 sitemap.xml <lastmod> is updated to match. A GitHub Action runs this on every push that changes
 content/, so editing the Markdown (even on github.com) is all an update needs.
 
+Every page also links its stylesheet and script with a content fingerprint (style.css?v=1a2b3c4d5e),
+so a changed file is fetched at once instead of after the 4-hour cache runs out.
+
 Markdown, one line per paragraph:
     ---               front matter at the top (title, description, path), then dividers
     ## Heading        (### for a smaller one)
@@ -17,6 +20,7 @@ Markdown, one line per paragraph:
 from datetime import date
 from html import escape
 from pathlib import Path
+import hashlib
 import re
 import subprocess
 
@@ -82,6 +86,17 @@ def revised(source):
     return date.fromisoformat(stamp) if stamp else date.today()
 
 
+ASSETS = ('assets/css/style.css', 'assets/js/theme.js')
+
+
+def stamp(html):
+    """Point the page's stylesheet and script links at their current contents (?v=<fingerprint>)."""
+    for asset in ASSETS:
+        version = hashlib.sha256((ROOT / asset).read_bytes()).hexdigest()[:10]
+        html = re.sub(rf'(["\']/{re.escape(asset)})(?:\?v=[0-9a-f]+)?(["\'])', rf'\g<1>?v={version}\g<2>', html)
+    return html
+
+
 def build():
     template = (ROOT / 'templates/page.html').read_text(encoding='utf-8')
     sitemap_path = ROOT / 'sitemap.xml'
@@ -100,6 +115,7 @@ def build():
                            'revised': f'{day:%B} {day.day}, {day.year}', 'revised_iso': day.isoformat(),
                            'year': str(date.today().year)}.items():
             page = page.replace('{{' + key + '}}', value)
+        page = stamp(page)
         output = ROOT / f'{source.stem}.html'
         if not output.exists() or output.read_text(encoding='utf-8') != page:
             output.write_text(page, encoding='utf-8')
@@ -107,6 +123,12 @@ def build():
         # Keep the sitemap's date for this page in step with its revision date.
         sitemap = re.sub(rf'(<loc>https://whosmalikx\.com{re.escape(path)}</loc>\s*<lastmod>)[^<]*(</lastmod>)',
                          rf'\g<1>{day.isoformat()}\g<2>', sitemap)
+    # The hand-written pages get the same fingerprints.
+    for output in (ROOT / 'index.html', ROOT / '404.html'):
+        html = output.read_text(encoding='utf-8')
+        if stamp(html) != html:
+            output.write_text(stamp(html), encoding='utf-8')
+            changed.append(output.name)
     if sitemap and sitemap != sitemap_path.read_text(encoding='utf-8'):
         sitemap_path.write_text(sitemap, encoding='utf-8')
         changed.append('sitemap.xml')

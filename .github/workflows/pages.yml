@@ -1,11 +1,12 @@
-# Rebuilds the text pages (privacy.html, ...) whenever their Markdown in content/ changes, then commits
-# the result; Cloudflare Pages publishes that commit. Edit content/privacy.md (even on github.com).
+# Rebuilds the text pages (privacy.html, ...) whenever their Markdown in content/ changes, and re-stamps
+# every page's asset links when the CSS or JS changes, then commits the result; Cloudflare Pages
+# publishes that commit. Edit content/privacy.md (even on github.com).
 name: Build pages
 
 on:
   push:
     branches: [main]
-    paths: ["content/**", "templates/**", "scripts/build_pages.py"]
+    paths: ["content/**", "templates/**", "scripts/build_pages.py", "assets/css/**", "assets/js/**", "index.html", "404.html"]
   workflow_dispatch:
 
 permissions:
