@@ -1,4 +1,9 @@
-/* whosmalikx.com. Shares tokens and components with lcna.whosmalikx.com; see DESIGN.md. */
+/* whosmalikx.com. Same design language as lcna.whosmalikx.com (see DESIGN.md): one typeface,
+   black and white, 17px base text on desktop.
+
+   Everything scales with the window in both directions: widths and type with its width, and the home
+   page's vertical spacing with its height too (capped at the roomy sizes), so the whole page,
+   "Find Me On" included, fits a 1080p screen at 100% or 125% scaling without scrolling. */
 
 @font-face {
   font-family: "Schibsted Grotesk";
@@ -18,41 +23,43 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* Light theme */
+/* ---------- Tokens ---------- */
+
 :root {
-  --bg: #f4f4f1;
+  --bg: #f5f5f4;
   --surface: #ffffff;
-  --surface-2: #ebebe7;
-  --line: #e0e0db;
-  --line-strong: #cbcbc5;
-  --text: #141618;
-  --text-soft: #3b3f45;
-  --text-muted: #60656d;
-  --accent: #0a5fc4;
+  --surface-2: #ececea;
+  --line: #e1e1de;
+  --line-strong: #c9c9c5;
+  --text: #121212;
+  --text-soft: #3c3c3c;
+  --text-muted: #666666;
+  --accent: #121212;
 
   --font: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --gutter: clamp(16px, 4vw, 56px);
-  --radius: 18px;
+  --radius: 16px;
   --pill: 999px;
   --ease: 160ms cubic-bezier(0.2, 0, 0, 1);
-  --measure: 70ch;
   --topbar: 60px;
   color-scheme: light;
 }
 
-/* Dark theme (default; set on <html> before paint) */
+/* Dark is the default (set on <html> before paint; theme.js remembers the choice). */
 html[data-theme="dark"] {
-  --bg: #141414;
-  --surface: #1b1b1b;
-  --surface-2: #232323;
-  --line: #2b2b2b;
-  --line-strong: #3b3b3b;
-  --text: #ececec;
-  --text-soft: #bdbdbd;
-  --text-muted: #8e8e8e;
-  --accent: #8ab4f8;
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface-2: #1c1c1c;
+  --line: #262626;
+  --line-strong: #3a3a3a;
+  --text: #f2f2f2;
+  --text-soft: #c4c4c4;
+  --text-muted: #8f8f8f;
+  --accent: #f2f2f2;
   color-scheme: dark;
 }
+
+/* ---------- Base ---------- */
 
 *,
 *::before,
@@ -63,11 +70,19 @@ html[data-theme="dark"] {
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  scrollbar-gutter: stable;  /* the header doesn't shift between short and long pages */
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 17px;
+  }
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: clip;
   font-family: var(--font);
   font-size: 1rem;
   line-height: 1.5;
@@ -92,7 +107,27 @@ a {
   background: color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
-/* Layout */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Every color switches at once when the theme flips (hover fades would lag behind the page). */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 1.05em;
+  height: 1.05em;
+}
+
+/* ---------- Layout ---------- */
+
 .site-shell {
   min-height: 100vh;
   display: flex;
@@ -104,7 +139,7 @@ main {
 }
 
 .container-wide {
-  width: min(1600px, 100% - 2 * var(--gutter));
+  width: min(1200px, 100% - 2 * var(--gutter));
   margin: 0 auto;
 }
 
@@ -113,15 +148,16 @@ main {
   margin: 0 auto;
 }
 
-/* Top bar: same chrome as the archive, linking the two sites. */
+/* ---------- Top bar (same chrome as the archive) ---------- */
+
 .topbar {
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid var(--line);
   background: color-mix(in srgb, var(--bg) 82%, transparent);
   backdrop-filter: saturate(160%) blur(16px);
   -webkit-backdrop-filter: saturate(160%) blur(16px);
-  border-bottom: 1px solid var(--line);
 }
 
 .topbar__inner {
@@ -151,28 +187,10 @@ main {
   mask: url("../icons/brand-mark.svg") no-repeat center / contain;
 }
 
-
 .topbar__actions {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.topbar__link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  padding: 0 12px;
-  border-radius: var(--pill);
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: color var(--ease), background var(--ease);
-}
-
-.topbar__link:hover {
-  background: var(--surface-2);
-  color: var(--text);
 }
 
 .icon-btn {
@@ -181,17 +199,16 @@ main {
   height: 40px;
   display: inline-grid;
   place-items: center;
-  border: 1px solid transparent;
+  border: 1px solid var(--line);
   border-radius: var(--pill);
   background: transparent;
   color: var(--text-soft);
   cursor: pointer;
-  transition: background var(--ease), color var(--ease), border-color var(--ease);
+  transition: background var(--ease), color var(--ease);
 }
 
 .icon-btn:hover {
   background: var(--surface-2);
-  border-color: var(--line);
   color: var(--text);
 }
 
@@ -217,98 +234,183 @@ html:not([data-theme="dark"]) .theme-toggle {
   --theme-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'/%3E%3C/svg%3E");
 }
 
-/* Home */
-.landing-layout {
-  padding: clamp(48px, 9vw, 112px) 0 80px;
-}
+/* ---------- Shared type ---------- */
 
 .hero-title {
   margin: 0;
-  font-size: clamp(2.75rem, 7vw, 5rem);
+  color: var(--text);
+  font-size: clamp(2.75rem, 5vw, 4.5rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
 }
 
-.hero-lede {
-  max-width: 44ch;
-  margin: 24px 0 0;
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
-  line-height: 1.5;
-  color: var(--text-soft);
-}
-
-.link-section {
-  margin-top: clamp(48px, 7vw, 80px);
-}
-
-
 .section-label {
   margin: 0 0 16px;
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 650;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
 }
 
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
-  gap: 14px;
+.text-link {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--ease);
+}
+
+.text-link:hover {
+  text-decoration-color: var(--text);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-bottom: clamp(8px, 2vw, 20px);
+  padding: 6px 16px 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--pill);
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: color var(--ease), background var(--ease), border-color var(--ease);
+}
+
+.back-link:hover {
+  border-color: var(--line-strong);
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+/* ---------- Home ---------- */
+
+/* Vertical spacing takes the smaller of a width share and a height share, between a floor and the
+   roomy desktop size, so short windows (laptops, 125% scaling) keep the whole page in view. */
+.landing-layout {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;  /* the watermark word must never widen the page */
+  width: min(1200px, 100% - 2 * var(--gutter));
+  padding: clamp(24px, min(10vw, 7vh), 120px) 0 clamp(24px, 5vh, 80px);
+}
+
+/* Project Moon title touch: a label tab over the main title, with a huge faded watermark word. */
+.hero-watermark {
+  position: absolute;
+  top: 0.15em;
+  left: -0.04em;
+  z-index: -1;
   margin: 0;
-  padding: 0;
-  list-style: none;
+  color: color-mix(in srgb, var(--text) 6%, transparent);
+  font-size: clamp(5rem, min(13vw, 24vh), 11rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
 }
 
-.project-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  height: 100%;
-  min-height: 180px;
-  padding: 24px;
+.landing-layout .hero-title {
+  margin-bottom: clamp(10px, 2vh, 20px);
+}
+
+.hero-tab {
+  display: block;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 14px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: clamp(1.1rem, 1.6vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.hero-main {
+  display: block;
+  font-size: clamp(2.6rem, min(4.5vw, 7vh), 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.hero-lede {
+  max-width: 56ch;
+  margin: 0;
+  color: var(--text-soft);
+  font-size: clamp(1.05rem, 0.95rem + 0.3vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.link-section .section-label {
+  margin-bottom: clamp(10px, 1.8vh, 16px);
+}
+
+.link-section {
+  margin-top: clamp(24px, min(7vw, 5vh), 80px);
+}
+
+.project-feature {
+  display: grid;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
-  transition: background var(--ease), border-color var(--ease);
+  transition: border-color var(--ease), background var(--ease);
 }
 
-.project-card:hover {
+.project-feature:hover {
   border-color: var(--line-strong);
   background: var(--surface-2);
 }
 
-.project-card__meta {
+.project-feature__body {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: clamp(6px, 1.2vh, 10px);
+  padding: clamp(18px, min(4vw, 3.6vh), 32px);
+}
+
+.project-feature__meta {
   color: var(--text-muted);
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   font-weight: 550;
 }
 
-.project-card__title {
-  margin: 0;
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
-  font-weight: 800;
-  line-height: 1.05;
+.project-feature__title {
+  color: var(--text);
+  font-size: clamp(1.5rem, min(3vw, 5vh), 2rem);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
 }
 
-.project-card__desc {
-  margin: 0;
+.project-feature__desc {
   color: var(--text-soft);
   line-height: 1.55;
 }
 
-.project-card__cta {
+.project-feature__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin-top: auto;
-  color: var(--text-muted);
-  font-size: 0.875rem;
+  padding-top: clamp(8px, 1.6vh, 14px);
+  border-top: 1px dashed var(--line);
+  color: var(--text-soft);
   font-weight: 600;
   transition: color var(--ease);
 }
 
-.project-card:hover .project-card__cta {
+.project-feature:hover .project-feature__cta {
   color: var(--text);
 }
 
@@ -324,7 +426,7 @@ html:not([data-theme="dark"]) .theme-toggle {
 .pill-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   min-height: 44px;
   padding: 0 18px;
   border: 1px solid var(--line);
@@ -340,42 +442,23 @@ html:not([data-theme="dark"]) .theme-toggle {
   color: var(--text);
 }
 
-/* Privacy policy */
+/* ---------- Privacy policy (and other text pages) ---------- */
+
 .policy-layout {
+  width: min(1100px, 100% - 2 * var(--gutter));
   padding: clamp(24px, 4vw, 44px) 0 80px;
 }
 
-.article-panel {
-  max-width: var(--measure);
-  margin: 0 auto;
-}
-
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin-bottom: clamp(8px, 2vw, 20px);
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: color var(--ease);
-}
-
-.back-link:hover {
-  color: var(--text);
-}
-
 .article-content {
-  font-size: 1.0625rem;
-  line-height: 1.7;
   color: var(--text-soft);
+  font-size: clamp(1rem, 0.95rem + 0.15vw, 1.1rem);
+  line-height: 1.7;
   overflow-wrap: break-word;
 }
 
 .article-content .hero-title {
-  color: var(--text);
-  font-size: clamp(2.4rem, 6vw, 3.5rem);
-  line-height: 0.95;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  line-height: 1.08;  /* room between the title's descenders and "Last Revised" */
 }
 
 .article-content h2 {
@@ -401,32 +484,25 @@ html:not([data-theme="dark"]) .theme-toggle {
 }
 
 .article-content hr {
+  margin: 2em 0 0;
   border: 0;
   border-top: 1px solid var(--line);
-  margin: 2em 0 0;
 }
 
-.revision-date {
-  margin: 12px 0 0;
+.article-content .revision-date {
+  margin: 18px 0 0;
   color: var(--text-muted);
   font-size: 0.9375rem;
 }
 
-.text-link {
-  color: var(--text);
-  font-weight: 600;
+.revision-date a {
+  color: inherit;
   text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  text-decoration-color: var(--line-strong);
-  transition: text-decoration-color var(--ease);
+  text-underline-offset: 3px;
 }
 
-.text-link:hover {
-  text-decoration-color: var(--text);
-}
+/* ---------- Error page ---------- */
 
-/* Error page */
 .error-layout {
   display: flex;
   flex-direction: column;
@@ -442,15 +518,16 @@ html:not([data-theme="dark"]) .theme-toggle {
 .intro-block {
   max-width: 46ch;
   margin: 16px 0 28px;
+  color: var(--text-soft);
   font-size: 1.125rem;
   line-height: 1.55;
-  color: var(--text-soft);
 }
 
-/* Footer */
+/* ---------- Footer ---------- */
+
 .site-footer {
-  border-top: 1px solid var(--line);
   padding: 28px 0 36px;
+  border-top: 1px solid var(--line);
   color: var(--text-muted);
   font-size: 0.875rem;
 }
@@ -481,597 +558,4 @@ html:not([data-theme="dark"]) .theme-toggle {
 
 .footer-link:hover {
   color: var(--text);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
-
-.icon-btn,
-.icon-btn:hover {
-  border-color: var(--line);
-}
-
-.project-grid {
-  grid-template-columns: 1fr;
-}
-
-/* ---------- Round 6: shared identity with the archive ---------- */
-:root {
-  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
-}
-
-/* Same header geometry as the archive: reserve the scrollbar's space on short pages too. */
-html {
-  scrollbar-gutter: stable;
-}
-
-.icon {
-  flex-shrink: 0;
-  width: 1.05em;
-  height: 1.05em;
-}
-
-.landing-layout {
-  width: min(880px, 100% - 2 * var(--gutter));
-  padding-top: clamp(56px, 10vw, 120px);
-}
-
-.hero-greeting {
-  margin: 0 0 12px;
-  color: var(--text-muted);
-  font-family: var(--mono);
-  font-size: 0.9375rem;
-}
-
-.hero-title {
-  font-size: clamp(3rem, 9vw, 6rem);
-}
-
-.hero-rule {
-  width: min(100%, 520px);
-  margin: 24px 0 0;
-  border: 0;
-  border-top: 2px dashed var(--line-strong);
-}
-
-.section-label {
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-/* Featured project: text beside a real preview of the archive. */
-.project-feature {
-  display: grid;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  transition: border-color var(--ease), background var(--ease);
-}
-
-.project-feature:hover {
-  border-color: var(--line-strong);
-  background: var(--surface-2);
-}
-
-.project-feature__body {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: clamp(22px, 4vw, 32px);
-}
-
-.project-feature__meta {
-  color: var(--text-muted);
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-}
-
-.project-feature__title {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.project-feature__desc {
-  color: var(--text-soft);
-  line-height: 1.55;
-}
-
-.project-feature__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px dashed var(--line);
-  color: var(--text-soft);
-  font-weight: 600;
-}
-
-.project-feature:hover .project-feature__cta {
-  color: var(--text);
-}
-
-.project-feature__media {
-  display: block;
-  border-top: 1px solid var(--line);
-  background: var(--bg);
-}
-
-.project-feature__media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top left;
-}
-
-@media (min-width: 760px) {
-  .project-feature {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    min-height: 300px;
-  }
-
-  .project-feature__media {
-    border-top: 0;
-    border-left: 1px solid var(--line);
-  }
-}
-
-.pill-link {
-  gap: 6px;
-}
-
-.back-link {
-  gap: 8px;
-  padding: 6px 16px 6px 12px;
-  border: 1px solid var(--line);
-  border-radius: var(--pill);
-  color: var(--text-soft);
-  font-size: 0.95rem;
-}
-
-.back-link:hover {
-  border-color: var(--line-strong);
-  background: var(--surface-2);
-}
-
-/* Without a preview image the feature card is a single, roomy column. */
-@media (min-width: 760px) {
-  .project-feature {
-    grid-template-columns: 1fr;
-    min-height: 0;
-  }
-}
-
-/* ===== Round 8: shared Limbus-notice palette with the archive ===== */
-:root {
-  --bg: #ece2cc;
-  --surface: #f6eedd;
-  --surface-2: #e6d9bd;
-  --line: #d3c29f;
-  --line-strong: #b8a27a;
-  --frame: #a27a4b;
-  --frame-strong: #7c5631;
-  --gold: #8a5a06;
-  --text: #2a2016;
-  --text-soft: #4b3d2c;
-  --text-muted: #6f604b;
-  --accent: #8e1b12;
-  --cut: 10px;
-}
-
-html[data-theme="dark"] {
-  --bg: #0b0a09;
-  --surface: #131110;
-  --surface-2: #1b1815;
-  --line: #2c251e;
-  --line-strong: #463a2c;
-  --frame: #6f5538;
-  --frame-strong: #a8834f;
-  --gold: #efc04a;
-  --text: #ede3cf;
-  --text-soft: #cabfa8;
-  --text-muted: #978b77;
-  --accent: #efc04a;
-}
-
-.topbar {
-  border-bottom-color: var(--frame);
-}
-
-.hero-title,
-.project-feature__title,
-.article-content .hero-title,
-.article-content h2 {
-  color: var(--gold);
-}
-
-.hero-rule {
-  border-top: 1px solid var(--gold);
-  opacity: 0.7;
-}
-
-/* Bronze-framed, chamfered panel, as in the archive and the game. */
-.project-feature {
-  position: relative;
-  isolation: isolate;
-  border: 0;
-  border-radius: 0;
-  background: var(--frame);
-  clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)),
-    calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
-}
-
-.project-feature::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  z-index: -1;
-  background: var(--surface);
-  clip-path: inherit;
-}
-
-.project-feature:hover {
-  background: var(--frame-strong);
-}
-
-.project-feature:hover::before {
-  background: var(--surface-2);
-}
-
-/* ===== Round 9: black and white site-wide; the notice palette lives on notice pages only ===== */
-:root {
-  --bg: #f5f5f4;
-  --surface: #ffffff;
-  --surface-2: #ececea;
-  --line: #e1e1de;
-  --line-strong: #c9c9c5;
-  --frame: #cfcfcb;
-  --frame-strong: #8f8f8a;
-  --gold: var(--text);
-  --text: #121212;
-  --text-soft: #3c3c3c;
-  --text-muted: #666666;
-  --accent: #121212;
-}
-
-html[data-theme="dark"] {
-  --bg: #0a0a0a;
-  --surface: #141414;
-  --surface-2: #1c1c1c;
-  --line: #262626;
-  --line-strong: #3a3a3a;
-  --frame: #353535;
-  --frame-strong: #6b6b6b;
-  --gold: var(--text);
-  --text: #f2f2f2;
-  --text-soft: #c4c4c4;
-  --text-muted: #8f8f8f;
-  --accent: #f2f2f2;
-}
-
-.topbar {
-  border-bottom-color: var(--line);
-}
-
-/* Project Moon title touch: the angled label tab (as on "Extraction Probabilities" and skill
-   names) over the main title, with a huge faded watermark word like "IDENTITY INFO". */
-.archive-hero,
-.landing-layout {
-  position: relative;
-  isolation: isolate;
-}
-
-.hero-watermark {
-  position: absolute;
-  top: -0.32em;
-  left: -0.04em;
-  z-index: -1;
-  margin: 0;
-  color: color-mix(in srgb, var(--text) 6%, transparent);
-  font-size: clamp(5.5rem, 17vw, 15rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-}
-
-.hero-title {
-  color: var(--text);
-}
-
-.hero-tab {
-  display: block;
-  width: fit-content;
-  margin-bottom: 14px;
-  padding: 7px 30px 7px 14px;
-  background: var(--text);
-  color: var(--bg);
-  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.005em;
-  clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
-}
-
-.hero-main {
-  display: block;
-}
-
-.hero-rule {
-  display: none;
-}
-
-.hero-lede {
-  margin-top: 22px;
-}
-
-.project-feature__title,
-.article-content .hero-title,
-.article-content h2 {
-  color: var(--text);
-}
-
-/* Privacy: room between the title's descenders and "Last Revised". */
-.article-content .hero-title {
-  line-height: 1.08;
-}
-
-.revision-date {
-  margin-top: 18px;
-}
-
-.landing-layout .hero-watermark {
-  top: 0.15em;
-}
-
-.article-content .revision-date {
-  margin: 18px 0 0;
-}
-.article-content .revision-date a {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* ===== Round 10 ===== */
-/* One typeface throughout: the monospace accent is retired; figures stay aligned. */
-:root {
-  --mono: var(--font);
-}
-
-.notice-card__meta,
-.notice-date,
-.hero-meta,
-.archive-results,
-.tag-filter__count,
-.section-label,
-.project-feature__meta {
-  font-variant-numeric: tabular-nums;
-}
-
-/* The "Limbus Company" tab reads as part of the title, not a footnote. */
-.hero-tab {
-  margin-bottom: 12px;
-  padding: 8px 40px 8px 16px;
-  font-size: clamp(1.25rem, 2.6vw, 2.1rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  clip-path: polygon(0 0, 100% 0, calc(100% - 22px) 100%, 0 100%);
-}
-
-/* Privacy: a wider column whose text grows on large displays. */
-.policy-layout {
-  width: min(1040px, 100% - 2 * var(--gutter));
-}
-
-.policy-layout .article-panel {
-  max-width: none;
-}
-
-.policy-layout .article-content {
-  font-size: clamp(1.0625rem, 0.9rem + 0.4vw, 1.3rem);
-}
-
-/* Home: give the page more presence on wide screens. */
-.landing-layout {
-  width: min(1040px, 100% - 2 * var(--gutter));
-}
-
-.hero-lede {
-  max-width: 52ch;
-}
-
-.project-feature__meta {
-  font-variant-numeric: normal;
-}
-
-/* ===== Round 11: scale with the monitor ===== */
-.landing-layout,
-.policy-layout {
-  width: min(1500px, 100% - 2 * var(--gutter));
-}
-
-.hero-lede {
-  font-size: clamp(1.1rem, 0.8rem + 0.6vw, 1.6rem);
-  max-width: 56ch;
-}
-
-.policy-layout .article-content {
-  font-size: clamp(1.0625rem, 0.75rem + 0.55vw, 1.45rem);
-}
-
-/* ===== Round 12: use large monitors ===== */
-.landing-layout,
-.policy-layout {
-  width: min(1800px, 100% - 2 * var(--gutter));
-}
-
-.hero-title {
-  font-size: clamp(3rem, 6vw, 8rem);
-}
-
-.hero-tab {
-  font-size: clamp(1.25rem, 1.8vw, 2.4rem);
-}
-
-.container-wide {
-  width: min(1800px, 100% - 2 * var(--gutter));
-}
-
-/* ===== Round 13 ===== */
-/* Rounded panels instead of chamfered corners. */
-.notice-card,
-.notice-layout .article-panel,
-.project-feature {
-  clip-path: none;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--surface);
-}
-
-.notice-card::before,
-.notice-layout .article-panel::before,
-.project-feature::before {
-  display: none;
-}
-
-.notice-card:hover,
-.project-feature:hover {
-  border-color: var(--line-strong);
-  background: var(--surface-2);
-}
-
-/* The watermark word must never widen the page. */
-.archive-hero,
-.landing-layout {
-  overflow-x: clip;
-  overflow-y: visible;
-}
-
-body {
-  overflow-x: clip;
-}
-
-/* ===== Round 14: natural sizes ===== */
-.landing-layout {
-  width: min(1200px, 100% - 2 * var(--gutter));
-}
-
-.policy-layout {
-  width: min(1100px, 100% - 2 * var(--gutter));
-}
-
-.container-wide {
-  width: min(1200px, 100% - 2 * var(--gutter));
-}
-
-.hero-title {
-  font-size: clamp(2.75rem, 5vw, 4.5rem);
-}
-
-.hero-tab {
-  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
-}
-
-.hero-watermark {
-  font-size: clamp(5rem, 13vw, 11rem);
-}
-
-.hero-lede {
-  font-size: clamp(1.05rem, 0.95rem + 0.3vw, 1.25rem);
-}
-
-.policy-layout .article-content {
-  font-size: clamp(1rem, 0.95rem + 0.15vw, 1.1rem);
-}
-
-.article-content .hero-title {
-  font-size: clamp(2.2rem, 4vw, 3rem);
-}
-
-/* ===== Round 23: rectangles, not cut corners ===== */
-.hero-tab,
-.notice-kicker {
-  clip-path: none;
-  padding-right: 14px;
-}
-
-/* Same scale as the LCNA archive: 17px base on desktop, whole layout 8% larger on big displays. */
-@media (min-width: 1200px) {
-  html {
-    font-size: 17px;
-  }
-}
-
-@media (min-width: 1920px) {
-  body {
-    zoom: 1.08;
-  }
-}
-
-/* Hero matches the LCNA archive header: same tab and title sizes. */
-.landing-layout .hero-tab,
-.hero-tab {
-  padding: 7px 14px;
-  font-size: clamp(1.1rem, 1.6vw, 1.6rem);
-}
-
-.landing-layout .hero-main,
-.hero-main {
-  font-size: clamp(2.6rem, 4.5vw, 4rem);
-}
-
-/* No color transitions while the theme flips (the project card lagged behind). */
-html.theme-switching *,
-html.theme-switching *::before,
-html.theme-switching *::after {
-  transition: none !important;
-}
-
-/* Type rhythm matched to the LCNA archive (same design, same measurements). */
-.landing-layout .hero-main,
-.hero-main {
-  letter-spacing: -0.035em;
-  line-height: 1.02;
-}
-
-.hero-tab {
-  letter-spacing: -0.01em;
-}
-
-.landing-layout .hero-title {
-  margin-bottom: 20px;
-}
-
-.landing-layout .hero-lede {
-  margin-top: 0;
-}
-
-.section-label {
-  font-size: 0.875rem;
-  font-weight: 650;
-}
-
-.project-feature__meta {
-  font-size: 0.9rem;
-  font-weight: 550;
-}
-
-.project-feature__title {
-  font-weight: 750;
-  letter-spacing: -0.015em;
 }
