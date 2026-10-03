@@ -5,40 +5,40 @@ path: /privacy
 ---
 
 ## General
-① The operator of whosmalikx.com (hereinafter referred to as the “Operator”) establishes this privacy policy (hereinafter referred to as the “Policy”) to set out how information is handled on whosmalikx.com and its subdomains, including lcna.whosmalikx.com (hereinafter collectively referred to as the “Website”), and to protect the rights and interests of users.
-② The Website is a personal, non-commercial website. It has no user accounts, registration, comments, purchases, or forms, and it does not ask users for any personal information.
-③ This Policy is linked from every page of the Website through the “Privacy Policy” link so that users can easily view it.
+1) The operator of whosmalikx.com (hereinafter referred to as the “Operator”) establishes this privacy policy (hereinafter referred to as the “Policy”) to set out how information is handled on whosmalikx.com and its subdomains, including lcna.whosmalikx.com (hereinafter collectively referred to as the “Website”), and to protect the rights and interests of users.
+2) The Website is a personal, non-commercial website. It has no user accounts, registration, comments, purchases, or forms, and it does not ask users for any personal information.
+3) This Policy is linked from every page of the Website through the “Privacy Policy” link so that users can easily view it.
 
 ---
 
 ## Article 1 (Purpose of Processing Information)
 The Website itself does not collect personal information. Limited technical information is processed only by the infrastructure providers listed in Article 4, only for the following purposes, and is not used for any other purpose.
-① Delivery of the pages and files requested by users
-② Maintenance of the performance and availability of the Website
-③ Security of the Website, including the detection and prevention of abuse and attacks
+1) Delivery of the pages and files requested by users
+2) Maintenance of the performance and availability of the Website
+3) Security of the Website, including the detection and prevention of abuse and attacks
 
 ---
 
 ## Article 2 (Items of Information Processed)
-① The Operator does not collect personal information such as names, e-mail addresses, telephone numbers, or account details.
-② The following information may be generated automatically when a user accesses the Website and processed by the infrastructure providers as part of their standard operation.
+1) The Operator does not collect personal information such as names, e-mail addresses, telephone numbers, or account details.
+2) The following information may be generated automatically when a user accesses the Website and processed by the infrastructure providers as part of their standard operation.
 – IP address, date and time of access, requested address, browser and device type (user agent), and referring page
-③ To the extent the Website uses analytics, only aggregated and anonymized statistics, such as page view counts, are used. Analytics are not used to identify or track individual users.
+3) To the extent the Website uses analytics, only aggregated and anonymized statistics, such as page view counts, are used. Analytics are not used to identify or track individual users.
 
 ---
 
 ## Article 3 (Retention and Destruction of Information)
-① The Operator does not keep server-side records of personal information and therefore holds no personal information to retain or destroy.
-② Technical information processed by the infrastructure providers is retained and deleted under each provider's own policy and is not kept longer than necessary for the purposes in Article 1.
+1) The Operator does not keep server-side records of personal information and therefore holds no personal information to retain or destroy.
+2) Technical information processed by the infrastructure providers is retained and deleted under each provider's own policy and is not kept longer than necessary for the purposes in Article 1.
 
 ---
 
 ## Article 4 (Infrastructure Providers)
 The Website is delivered through the following third-party providers. These providers may process the information in Article 2, Paragraph 2, as part of their services, and such processing is governed by each provider's own privacy policy.
-① Cloudflare, Inc.
+1) Cloudflare, Inc.
 – Services: hosting, content delivery, domain name (DNS) service, and security protection for the Website
 – Privacy policy: [Cloudflare Privacy Policy](https://www.cloudflare.com/privacypolicy/)
-② GitHub, Inc.
+1) GitHub, Inc.
 – Services: storage and deployment of the Website's source code. Users' visits to the Website are not sent to GitHub.
 – Privacy policy: [GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement)
 ③ Apart from the above, the Website uses no advertising networks, payment processors, social media plug-ins, or other third-party services. Fonts, images, and scripts are served from the Website itself.
@@ -46,23 +46,23 @@ The Website is delivered through the following third-party providers. These prov
 ---
 
 ## Article 5 (Provision of Information to Third Parties)
-① The Operator does not sell, rent, or otherwise provide personal information to third parties.
-② Information processed by the infrastructure providers may be disclosed by those providers where required by law, such as a lawful request from an investigative agency, under each provider's own policy.
+1) The Operator does not sell, rent, or otherwise provide personal information to third parties.
+2) Information processed by the infrastructure providers may be disclosed by those providers where required by law, such as a lawful request from an investigative agency, under each provider's own policy.
 
 ---
 
 ## Article 6 (Information Stored on Users' Devices)
-① The Website does not use cookies for tracking or advertising.
-② The Website stores only the user's theme preference (light or dark) in the browser's local storage, so that the chosen theme is kept between visits. This value remains on the user's device, is never sent to the Operator, and contains no personal information.
-③ Cloudflare may set strictly necessary cookies to protect the Website against malicious traffic. Such cookies are governed by the Cloudflare Privacy Policy.
-④ Users may delete or block stored data and cookies at any time through their browser settings. The Website remains usable without them; only the theme preference will not be remembered.
+1) The Website does not use cookies for tracking or advertising.
+2) The Website stores only the user's theme preference (light or dark) in the browser's local storage, so that the chosen theme is kept between visits. This value remains on the user's device, is never sent to the Operator, and contains no personal information.
+3) Cloudflare may set strictly necessary cookies to protect the Website against malicious traffic. Such cookies are governed by the Cloudflare Privacy Policy.
+4) Users may delete or block stored data and cookies at any time through their browser settings. The Website remains usable without them; only the theme preference will not be remembered.
 
 ---
 
 ## Article 7 (Rights of Users and How to Exercise Them)
-① Users may at any time ask the Operator to view, correct, delete, or stop the processing of their personal information.
-② Because the Operator does not collect personal information, such requests usually concern no information held by the Operator. Requests concerning information processed by an infrastructure provider should be made to that provider under its privacy policy.
-③ Requests and inquiries may be made through the contact channels listed on the main page of the Website ([whosmalikx.com](https://whosmalikx.com/)). The Operator will respond without undue delay and in accordance with applicable law.
+1) Users may at any time ask the Operator to view, correct, delete, or stop the processing of their personal information.
+2) Because the Operator does not collect personal information, such requests usually concern no information held by the Operator. Requests concerning information processed by an infrastructure provider should be made to that provider under its privacy policy.
+3) Requests and inquiries may be made through the contact channels listed on the main page of the Website ([whosmalikx.com](https://whosmalikx.com/)). The Operator will respond without undue delay and in accordance with applicable law.
 
 ---
 
@@ -72,10 +72,10 @@ The Website is not directed at children under the age of 13, or the minimum age 
 ---
 
 ## Article 9 (Measures to Ensure Security)
-① All connections to the Website are encrypted with HTTPS (TLS).
-② The Website is protected against attacks and abuse by Cloudflare's security services.
-③ Administrative tools of the Website are restricted to the Operator and protected by access control.
-④ However, no method of transmission over the internet is completely secure, and absolute security cannot be guaranteed.
+1) All connections to the Website are encrypted with HTTPS (TLS).
+2) The Website is protected against attacks and abuse by Cloudflare's security services.
+3) Administrative tools of the Website are restricted to the Operator and protected by access control.
+4) However, no method of transmission over the internet is completely secure, and absolute security cannot be guaranteed.
 
 ---
 
