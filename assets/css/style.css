@@ -25,25 +25,14 @@
 
 /* ---------- Tokens ---------- */
 
-/* Proportional scaling (desktop monitors): sizes below are in --u. On a 1920-2560 wide window the
-   2560 design is shown at the window's scale (0.75 at 1920, 1 at 2560), so a 1080p and a 1440p
-   monitor show the same layout at their own size; wider windows grow it (up to 1.5 at 3840).
-   1440px and narrower (laptops, snapped half-width windows, tablets, phones) keep 1px, as before,
-   and 1440-1920 eases between the two. 1px hairlines and viewport units are left as they are. */
+/* Proportional scaling (desktop monitors): sizes below are in --u. An inline script in each page's
+   <head> sets it from the monitor's width: (screen width / 2560) ^ 0.565, so 1px on a 2560-wide
+   monitor (1440p), 0.85px on 1920 (1080p), 0.68px on 1280, up to 1.5px; 1px on phones and tablets.
+   Based on the monitor, not the window: a snapped half-width window keeps its monitor's size, and
+   browser zoom works as usual. Without the script everything is 1px. 1px hairlines and viewport units
+   are left as they are. */
 :root {
   --u: 1px;
-}
-
-@media (min-width: 1441px) and (max-width: 1919px) {
-  :root {
-    --u: calc(1px - (100vw - 1440px) / 1920);
-  }
-}
-
-@media (min-width: 1920px) {
-  :root {
-    --u: clamp(0.75px, calc(100vw / 2560), 1.5px);
-  }
 }
 
 :root {
