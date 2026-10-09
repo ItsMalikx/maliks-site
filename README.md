@@ -41,7 +41,3 @@ The project structure is intentionally simple and easy to navigate.
 
 To preview locally: `python scripts/build_pages.py`, then open `privacy.html`.
 Another text page (e.g. terms): add `content/terms.md` with a `path: /terms` front-matter line.
-
-## License
-
-This project is licensed under the GNU General Public License v3.0. See the `LICENSE` file for details.
