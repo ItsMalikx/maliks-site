@@ -82,6 +82,11 @@ html {
   text-size-adjust: 100%;
   scrollbar-gutter: stable;  /* the header doesn't shift between short and long pages */
 }
+/* No rubber-band past the top or bottom with a trackpad (it pulls the header down off the window's
+   edge); touch screens keep it, as their pull-to-refresh. */
+@media (hover: hover) and (pointer: fine) {
+  html { overscroll-behavior-y: none; }
+}
 
 @media (min-width: 1200px) {
   html {
